@@ -1,0 +1,43 @@
+{
+    "AverageSalaries": {
+    "expected_columns": ["Year", "Fielding", "Pitching"],
+        "expected_types": {
+            "Year": "int",
+            "Fielding": "double",
+            "Pitching": "double"
+        },
+        "key_columns": ["Year"]
+    },
+    "HallOfFameAllStarPitchers": {
+        "expected_columns": ["Player", "ERA", "# All Star Appearances", "Hall of Fame Induction Year"],
+        "expected_types": {
+            "Player": "string",
+            "ERA": "double",
+            "# All Star Appearances": "bigint",
+            "Hall of Fame Induction Year": "int"
+        },
+        "key_columns": ["Player"]
+    },
+    "Pitching": {
+        "expected_columns": ["Year", "Player", "Regular Season ERA", "Regular Season Win/Loss", "Post-season ERA", "Post-season Win/Loss"],
+        "expected_types": {
+            "Year": "int",
+            "Player": "string",
+            "Regular Season ERA": "double",
+            "Regular Season Win/Loss": "double",
+            "Post-season ERA": "double",
+            "Post-season Win/Loss": "double"
+        },
+        "key_columns": ["Year", "Player"]
+    },
+    "Rankings": {
+        "expected_columns": ["Team ID", "Year", "Rank", "At Bats"],
+        "expected_types": {
+            "Team ID": "string",
+            "Year": "int",
+            "Rank": "int",
+            "At Bats": "int"
+        },
+        "key_columns": ["Team ID", "Year"]
+    }
+}
