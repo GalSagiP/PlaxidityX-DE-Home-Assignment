@@ -48,7 +48,7 @@ services:
     depends_on:
       - mysql
       - spark
-#      - minio
+      - minio
     volumes:
       - ./app:/app
       - ./output:/app/output

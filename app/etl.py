@@ -13,14 +13,12 @@ def create_spark_session():
     return SparkSession.builder \
     .appName("ETL Job") \
     .config("spark.jars", "/opt/spark/jars/mysql-connector-java-8.0.29.jar") \
+    .config("spark.hadoop.fs.s3a.endpoint", "http://localhost:9000") \
+    .config("spark.hadoop.fs.s3a.secret.key", "minioadmin") \
+    .config("spark.hadoop.fs.s3a.access.key", "minioadmin") \
+    .config("spark.hadoop.fs.s3a.connection.maximum", "100") \
+    .config("spark.hadoop.fs.s3a.path.style.access", "true") \
     .getOrCreate()
-
-    # config to MinIO - add to the Spark builder when using MinIO
-    # .config("spark.hadoop.fs.s3a.endpoint", "http://localhost:9000") \
-    # .config("spark.hadoop.fs.s3a.secret.key", "minioadmin") \
-    # .config("spark.hadoop.fs.s3a.access.key", "minioadmin") \
-    # .config("spark.hadoop.fs.s3a.connection.maximum", "100") \
-    # .config("spark.hadoop.fs.s3a.path.style.access", "true") \
 
 def main():
     """
