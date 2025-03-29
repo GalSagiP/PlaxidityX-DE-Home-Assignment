@@ -26,7 +26,7 @@ def main():
     print(">>>>>>>>>>>>>> Starting ETL Process")
 
     average_salary.main(spark, schema_path)
-    # allstar_appearance.main(spark, schema_path)
+    allstar_appearance.main(spark, schema_path)
     top_10_pitchers.main(spark, schema_path)
     first_last_place.main(spark, schema_path)
 
