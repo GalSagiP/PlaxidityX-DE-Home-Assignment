@@ -25,7 +25,7 @@ This project implements an ETL (Extract, Transform, Load) pipeline using Apache 
 ### Description of key files:
 
 - **`etl.py`**: Contains the main ETL process (Extract, Transform, Load). This script orchestrates the reading, transforming, and saving of data.
-- **`....py`**: Defines the transformation logic for the individual tasks (e.g., average salary, Hall of Fame pitcher analysis, etc.).
+- **`.py transformation fiels`**: Defines the transformation logic for the individual tasks (e.g., average salary, Hall of Fame pitcher analysis, etc.).
 - **`utils.py`**: Helper functions for reading data from MySQL, saving the transformed data to MinIO, and other repetitive tasks.
 - **`lahman2016.sql`**: SQL schema for creating the Lahman 2016 database and importing the baseball data.
 - **`test.py`**: Contains unit tests for validating the transformed data. This script verifies that the output datasets have the correct column names, data types, no null values, and unique keys.
@@ -53,6 +53,12 @@ The transformation logic is divided into four parts:
 - **Part 4**: List the **first and last place teams** for each year and their **number of at-bats**.
 
 Each of these tasks reads the necessary data from MySQL, performs the appropriate calculations, and then returns the transformed data as a **Spark DataFrame**.
+
+### Code Readability vs. Conciseness
+In some parts of the code, it could have been shortened by chaining operations or using more compact PySpark functions. 
+However, this would come at the expense of code readability. 
+Given that the dataset is not large, and the number of actions within each transformation is not substantial, such optimizations would not lead to significant performance gains. 
+Therefore, I chose to maintain readability by breaking the transformations into more intermediate DataFrames for easier understanding and debugging.
 
 ### 3. **Loading**
 Once the transformations are complete, the results are saved as **CSV files** in **MinIO**, an S3-compatible object storage service. The processed files are uploaded to the specified bucket in MinIO for future consumption.
