@@ -9,14 +9,14 @@ def transformation(spark: SparkSession) -> DataFrame:
     all_star_df = read_from_mysql(spark,"(SELECT playerID, yearID FROM AllstarFull WHERE GP = 1) AS allstar_filtered")
     pitching_df = read_from_mysql(spark, "(SELECT playerID, yearID, ERA FROM Pitching) AS pitching_filtered")
 
-    # Rename the yearID column in both Hall of Fame and Pitching tables to make them distinct
+    # Rename the yearID column in Hall of Fame table for easy use
     induction_year_df = hof_df.groupBy("playerID").agg(F.min("yearID").alias("induction_year"))
 
     hof_df_filtered = induction_year_df.filter(F.col("playerID").isNotNull())
     allstar_df_filtered = all_star_df.filter(F.col("playerID").isNotNull())
     pitching_df_filtered = pitching_df.filter(F.col("playerID").isNotNull())
 
-    # Perform left join between the Hall of Fame DataFrame and the AllStar DataFrame
+    # Join between the Hall of Fame DataFrame and the AllStar DataFrame
     hof_allstar_df = hof_df_filtered.join(allstar_df_filtered, "playerID", "inner")
 
     # Count the number of All-Star appearances for each player
@@ -33,7 +33,7 @@ def transformation(spark: SparkSession) -> DataFrame:
     allstar_pitching_avg_era_df = allstar_pitching_df.groupBy("playerID").agg(
         F.avg("ERA").alias("avg_ERA"))
 
-    # combine the avg era with the # all-star
+    # Combine the avg ERA with the # All-star
     hof_allstar_pitching_avg_era_df = hof_allstar_with_count_df.join(allstar_pitching_avg_era_df,"playerID","inner"
                                                                       ).select(hof_allstar_with_count_df["playerID"],
                                                                         hof_allstar_with_count_df["all_star_count"],
@@ -41,7 +41,7 @@ def transformation(spark: SparkSession) -> DataFrame:
 
     final_df = hof_df_filtered.join(hof_allstar_pitching_avg_era_df,"playerID","inner")
 
-    # Casting and renaming columns for HallOfFameAllStarPitchers DataFrame
+    # Casting and renaming columns
     final_df = (final_df.selectExpr(
         "playerID as `Player`",
         "avg_ERA as `ERA`",

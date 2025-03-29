@@ -22,7 +22,7 @@ def transformation(spark: SparkSession) -> DataFrame:
     # Combine first and last place teams
     final_df = first_place_df.union(last_place_df).withColumnRenamed("Rank", "rank")
 
-    # Renaming columns for Rankings DataFrame
+    # Casting and renaming columns
     final_df = (final_df.selectExpr(
         "teamID as `Team ID`",
         "yearID as `Year`",

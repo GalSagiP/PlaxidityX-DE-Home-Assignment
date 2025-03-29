@@ -24,7 +24,7 @@ def transformation(spark: SparkSession) -> DataFrame:
     # Pivot to get columns Year | Fielding | Pitching
     final_avg_salary = avg_salary_df.groupBy("yearID").pivot("role").agg(avg("avg_salary"))
 
-    # Casting and renaming columns for AverageSalaries DataFrame
+    # Casting and renaming columns
     final_df = final_avg_salary.selectExpr(
         "yearID as `Year`",
         "Fielding as `Fielding`",

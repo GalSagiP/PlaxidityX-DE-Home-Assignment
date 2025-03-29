@@ -54,7 +54,7 @@ def transformation(spark: SparkSession) -> DataFrame:
         "avg_post_season_ERA", "avg_post_season_win_loss"
     ).orderBy("yearID", "playerID")
 
-    # Renaming columns for Pitching DataFrame
+    # Casting and renaming columns
     final_df = final_df.selectExpr(
         "yearID as `Year`",
         "playerID as `Player`",
