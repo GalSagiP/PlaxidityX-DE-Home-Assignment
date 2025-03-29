@@ -54,6 +54,9 @@ The transformation logic is divided into four parts:
 
 Each of these tasks reads the necessary data from MySQL, performs the appropriate calculations, and then returns the transformed data as a **Spark DataFrame**.
 
+I chose to use `selectExpr` instead of `StructField` for column casting and renaming because it’s more concise and avoids recreating each DataFrame to RDD. 
+This choice prioritizes readability without sacrificing significant performance.
+
 ### Code Readability vs. Conciseness
 In some parts of the code, it could have been shortened by chaining operations or using more compact PySpark functions. 
 However, this would come at the expense of code readability. 
