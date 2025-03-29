@@ -66,9 +66,7 @@ Therefore, I chose to maintain readability by breaking the transformations into 
 ### 3. **Loading**
 Once the transformations are complete, the results are saved as **CSV files** in **MinIO**, an S3-compatible object storage service. The processed files are uploaded to the specified bucket in MinIO for future consumption.
 
-
 #### Why MinIO?
-
 MinIO was chosen as the storage solution for this project due to the following reasons:
 1. **S3 Compatibility**: MinIO is fully compatible with Amazon S3's API. This makes it an ideal choice for projects that need to integrate with cloud storage solutions like AWS but want to avoid the costs associated with using AWS S3. MinIO provides the same functionality at a fraction of the cost by running in an on-premises or private cloud environment.
 2. **Cost-Effective**: MinIO is a lightweight, open-source object storage service that can be self-hosted. Since this project has constraints and we are not using AWS S3, MinIO offers a cost-effective alternative to store and retrieve large amounts of data in an object storage format.
