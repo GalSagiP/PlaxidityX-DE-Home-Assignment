@@ -3,7 +3,7 @@
 This project implements an ETL (Extract, Transform, Load) pipeline using Apache Spark for processing baseball data from the **Lahman Baseball Database**. The pipeline extracts data from a MySQL database, performs necessary transformations using Spark, and stores the results in **MinIO**, which serves as the S3-compatible object storage.
 
 ## Project Structure
-
+```
 ├── app/
 │   ├── etl.py
 │   ├── average_salary.py
@@ -20,7 +20,7 @@ This project implements an ETL (Extract, Transform, Load) pipeline using Apache 
 ├── docker-compose.yaml
 ├── streaming_vs_batch.md
 └── README.md
-
+```
 
 ### Description of key files:
 
