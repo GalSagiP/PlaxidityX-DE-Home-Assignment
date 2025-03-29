@@ -11,18 +11,9 @@ def transformation(spark: SparkSession) -> DataFrame:
     # Identify player roles (Fielders vs Pitchers), Classify based on majority appearances
     players_roles = appearances_df.withColumn(
         "role",
-        when(
-            (col("G_P") > (col("G_1B") + col("G_2B") + col("G_3B") + col("G_SS"))), "Pitching"
-        ).when(
-            (col("G_1B") + col("G_2B") + col("G_3B") + col("G_SS")) > 0, "Fielding"
-        )
-    )
-
-    # Remove rows where role is null (players with no appearances)
-    players_roles = players_roles.filter(col("role").isNotNull())
-
-    # Drop unnecessary columns G_1B, G_2B, G_3B, G_SS, G_P
-    players_roles = players_roles.drop("G_1B", "G_2B", "G_3B", "G_SS", "G_P")
+        when((col("G_P") > (col("G_1B") + col("G_2B") + col("G_3B") + col("G_SS"))), "Pitching")
+        .when((col("G_1B") + col("G_2B") + col("G_3B") + col("G_SS")) > 0, "Fielding")
+    ).filter(col("role").isNotNull()).drop("G_1B", "G_2B", "G_3B", "G_SS", "G_P")
 
     # Join Salaries with player roles
     salaries_roles_df = salaries_df.join(players_roles, ["playerID", "yearID"])

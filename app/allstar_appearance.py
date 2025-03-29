@@ -9,7 +9,7 @@ def transformation(spark: SparkSession) -> DataFrame:
     all_star_df = read_from_mysql(spark,"(SELECT playerID, yearID FROM AllstarFull WHERE GP = 1) AS allstar_filtered")
     pitching_df = read_from_mysql(spark, "(SELECT playerID, yearID, ERA FROM Pitching) AS pitching_filtered")
 
-    # Step 1: Rename the yearID column in both Hall of Fame and Pitching tables to make them distinct
+    # Rename the yearID column in both Hall of Fame and Pitching tables to make them distinct
     induction_year_df = hof_df.groupBy("playerID").agg(F.min("yearID").alias("induction_year"))
 
     hof_df_filtered = induction_year_df.filter(F.col("playerID").isNotNull())

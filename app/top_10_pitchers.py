@@ -15,7 +15,7 @@ def transformation(spark: SparkSession) -> DataFrame:
 
     # Keep only the regular-season stats from that team
     regular_season_filtered = regular_season_df.join(
-        post_season_teams, on=["yearID", "playerID", "teamID"],how="inner"
+        post_season_teams, ["yearID", "playerID", "teamID"],"inner"
     )
 
     # Compute Regular Season Metrics
