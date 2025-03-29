@@ -1,6 +1,4 @@
 from pyspark.sql import SparkSession
-import shutil
-import os
 import average_salary
 import allstar_appearance
 import top_10_pitchers
